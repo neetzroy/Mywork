@@ -16,11 +16,191 @@ class Musician
     } 
     displayDetails()
     {
-        console.log("SHOWING MUSICIAN DETAILS AND THEIR INTERESTING FACT----> " +" I AM "+this.musName+ "\n"+" I AM A "
-            + this.musType+" & "+" INTERESTING FACT ABOUT ME IS : "+ this.interestFact)
+        var dispData='\n\n'+"SHOWING MUSICIAN DETAILS AND THEIR INTERESTING FACT----> " +" I AM "+this.musName+ "\n"+" I AM A "
+            + this.musType+" & "+" INTERESTING FACT ABOUT ME IS : "+ this.interestFact
+            console.log(dispData)
+            return dispData
     }
  
 }
+
+class Guitarist extends Musician{
+    constructor()
+    {   
+        super()  
+    }
+   
+    displayDetails()
+    {
+        if(myMus[0]=='guitarist')
+        {
+        var musician= 'Musician Name: '+myMus[0] + "\n"+'Year of Playing: '+myMus[2]+'Hourly Rate: '+myMus[3]
+        console.log('\n'+"RECORDING GUITARIST DETAILS :----------> "+ musician)
+        }
+    }
+   
+ }  
+ class Bassist extends Musician{
+     constructor()
+     {   
+         super()
+     }
+     displayDetails()
+     {
+ 
+         if(myMus[0]=='bassist')
+         {
+             var musician= 'Musician Name: '+myMus[0] + "\n"+'Year of Playing: '+myMus[2]+'Hourly Rate: '+myMus[3]
+         console.log('\n'+"REOCORDING BASSIST DETAILS:---------->  "+ musician)
+         }
+     }
+ 
+ }
+ class Percussionist extends Musician{
+     constructor()
+     {   
+         super()
+     }
+     displayDetails()
+     {
+         if(myMus[0]=='percussionist')
+         {
+             var musician= 'Musician Name: '+myMus[0] + "\n"+'Year of Playing: '+myMus[2]+'Hourly Rate: '+myMus[3]
+         console.log('\n'+"RECORDING PERCUSSIONIST DETAILS :----------> "+ musician)
+         }
+     }
+ 
+ }
+     class Flautist extends Musician{
+         constructor()
+         {   
+             super()
+         }
+         displayDetails()
+         {
+             if(myMus[0]=='flautist')
+             {
+                 var musician= 'Musician Name: '+myMus[0] + "\n"+'Year of Playing: '+myMus[2]+'Hourly Rate: '+myMus[3]
+             console.log('\n'+"RECORDING FLAUTIST DETAILS----------> : "+ musician)
+             }
+         }
+ }    
+class Troupe{
+    
+    constructor(troupeName,noOfInstrument,genreTroupe,durationTroupe,hourlyRateTroupe)
+    {
+        this.hourlyValue=''
+        this.troupeName= troupeName
+        this.noOfInstrument=noOfInstrument
+        this.genreTroupe=genreTroupe
+        this.durationTroupe=durationTroupe
+        this.hourlyRateTroupe=hourlyRateTroupe
+    }
+    addMusician()
+    {         
+            var musDetails= "Musician name: "+ myMus[0]+"\n"
+            +"Musician Playing Year: "+myMus[2]
+            +"\n"+"Hourly Rate: "+myMus[3]
+
+            console.log('\n'+'ADDED MUSICIAN DETAILS:---------->'+'\n'+ musDetails)
+            return musDetails
+          
+    }
+    
+    showMusicianSummary()
+    {
+
+        
+            console.log('\n'+"SHOWING MUSICIAN DETAILS AND THEIR INTERESTING FACT----------> " +" I AM "+myMus[0]+
+            "\n"+" I AM A "+ myMus[1]+" & "+" INTERESTING FACT ABOUT ME IS : "+myMus[4])
+    }
+    setGenre(Troups)
+    {
+        var genre = ['jass','rock','pop']
+        do
+        {  
+                    switch(Troups)
+                        {
+                            case genre[0]:
+                            case genre[1]:
+                            case genre[2]:
+                            case genre[3]:
+                                var Troups=prompt("Enter the Genre Type from the list: Jass/Rock/Pop---> : ").toLowerCase()
+                                break
+                            default:
+                                Troups=prompt("Enter a valid genre type from the list: Jass/Rock/Pop---> ").toLowerCase()
+                        }
+        }
+        while (genre.indexOf(Troups) === -1);
+
+        return Troups 
+    }
+    setDuration(Durations)
+    {
+        var Durations=prompt("Enter a valid duration time between 0.5 & 3 ")
+        while( (Durations>3) || isNaN(Durations) || (Durations<0.5))
+        {
+            Durations=prompt("Enter a valid duration time between 0.5 & 3: ")
+        }
+       
+        return Durations
+    }
+    setHourlyVal(Val)
+    {
+       this.hourlyValue=Val 
+    }
+    showtroupeSummary()
+    {  
+                var troupeSummary= "Troupe Name is:"+this.troupeName+
+                "\n"+"No of instruments included: "+this.noOfInstrument+
+                "\n"+"Genre Playing: "+troupeVal+
+                "\n"+"Duration of Play :"+durationsVal+
+                "\n"+"Hourly rate of troupe: "+this.hourlyRateTroupe
+    
+                console.log('\n'+"TROUPE DETAILS:----------> "+'\n'+troupeSummary)
+                return troupeSummary
+    }  
+    costOfTroupe()
+    {
+        let cost= parseFloat(this.hourlyValue*this.hourlyRateTroupe)
+        console.log('\n'+"COST OF TROUPE :----------> "+cost)
+        return cost
+    }
+    
+    readMusListFile()
+    {
+        const fs = require('fs')
+        const r = fs.readFileSync('MusicianList.txt','utf8') 
+        const list = r.split('\r\n')
+
+        console.log('\n\n'+"POPULATING TROUPE LIST FROM READ TEXT FILE---------->")
+        console.log(list)
+
+    return list
+    }
+    writeMusListFile()
+    {
+        const fs= require('fs')
+
+        let data='\n\n'+ "TROUPE DETAILED SUMMARY----------> "+
+        '\n'+"Troupe Name is:"+this.troupeName+
+        "\n"+"No of instruments included: "+this.noOfInstrument+
+        "\n"+"Genre Playing: "+troupeVal+
+        "\n"+"Duration of Play :"+durationsVal+
+        "\n"+"Hourly rate of troupe: "+this.hourlyRateTroupe
+
+        fs.appendFile("MusicianListNew.txt", data,function(err){
+            if(err) throw err;
+            });
+
+    }
+}
+
+
+//function for user input prompt
+console.log('\n')
+function enterMus()
+{   
 
         var musName1=prompt("Enter Musician name: ").toLowerCase()
         while (musName1.length>30 || musName1.length<3 )
@@ -29,7 +209,6 @@ class Musician
         }
 
         var types= ['guitarist','bassist','percussionist','flautist']
-        var i=0
         do
         {  
                     switch(musType1)
@@ -41,11 +220,11 @@ class Musician
                                 var musType1=prompt("Enter Musician Type: ").toLowerCase()
                                 break
                             default:
-                                musType1=prompt("Enter a valid musician type from the list: guitarist/bassist/percussionist/flautist---> ")
+                                musType1=prompt("Enter a valid musician type from the list: guitarist/bassist/percussionist/flautist---> ").toLowerCase()
                         }
         }
         while (types.indexOf(musType1) === -1);
-        
+        musType1
 
         var yearsPlaying1=prompt("Enter Musician year playing: ")
         while( (yearsPlaying1<1) || isNaN(yearsPlaying1) || yearsPlaying1.length>4)
@@ -59,151 +238,24 @@ class Musician
             hourlyRate1=prompt("Enter rate greater than 50: ")
         }
         var interestFact1=prompt("Enter Interesting Fact: ").toLowerCase()
-      
 
-      
-class Guitarist extends Musician{
-   constructor()
-   {   
-       super()  
-   }
-  
-   displayDetails()
-   {
-       if(musType1.toLowerCase()=='guitarist')
-       {
-       var musician= 'Musician Name: '+musName1 + "\n"+'Year of Playing: '+yearsPlaying1+'Hourly Rate: '+hourlyRate1
-       console.log("RECORDING GUITARIST DETAILS :----------> "+ musician)
-       }
-   }
-  
-}  
-class Bassist extends Musician{
-    constructor()
-    {   
-        super()
-    }
-    displayDetails()
-    {
-        if(musType1.toLowerCase()=='bassist')
-        {
-        var musician= 'Musician Name: '+musName1 + "\n"+'Year of Playing: '+yearsPlaying1+'Hourly Rate: '+hourlyRate1
-        console.log("REOCORDING BASSIST DETAILS:---------->  "+ musician)
-        }
-    }
+        const musArr=[]
+        musArr.push(musName1)   
+        musArr.push(musType1)   
+        musArr.push(yearsPlaying1) 
+        musArr.push(hourlyRate1) 
+        musArr.push(interestFact1) 
+
+return musArr
 
 }
-class Percussionist extends Musician{
-    constructor()
-    {   
-        super()
-    }
-    displayDetails()
-    {
-        if(musType1.toLowerCase()=='percussionist')
-        {
-        var musician= 'Musician Name: '+musName1 + "\n"+'Year of Playing: '+yearsPlaying1+'Hourly Rate: '+hourlyRate1
-        console.log("RECORDING PERCUSSIONIST DETAILS :----------> "+ musician)
-        }
-    }
 
-}
-    class Flautist extends Musician{
-        constructor()
-        {   
-            super()
-        }
-        displayDetails()
-        {
-            if(musType1.toLowerCase()=='flautist')
-            {
-            var musician= 'Musician Name: '+musName1 + "\n"+' Year of Playing: '+yearsPlaying1+' Hourly Rate: '+hourlyRate1
-            console.log("RECORDING FLAUTIST DETAILS----------> : "+ musician)
-            }
-        }
-}    
 
-class Troupe{
-    constructor(troupeName,noOfInstrument,genreTroupe,durationTroupe,hourlyRateTroupe)
-    {
-        this.troupeName= troupeName
-        this.noOfInstrument=noOfInstrument
-        this.genreTroupe=genreTroupe
-        this.durationTroupe=durationTroupe
-        this.hourlyRateTroupe=hourlyRateTroupe
-    }
-    addMusician()
-    {       
-      
-            var musDetails= "Musician name: "+ musName1+"\n"
-            +"Musician Playing Year: "+yearsPlaying1
-            +"\n"+"Hourly Rate: "+hourlyRate1
 
-            console.log('ADDED MUSICIAN DETAILS:---------->'+'\n'+ musDetails)
-          
-    }
-    
-    showMusicianSummary()
-    {
-        
-            console.log("SHOWING MUSICIAN DETAILS AND THEIR INTERESTING FACT----------> " +" I AM "+musName1+
-            "\n"+" I AM A "+ musType1+" & "+" INTERESTING FACT ABOUT ME IS : "+ interestFact1)
-    }
-    showtroupeSummary()
-    {  
-        var genre = ['jass','rock','pop']
-        //for (const each_value of genre)
-        //{
-            if((this.genreTroupe==genre[0] ||this.genreTroupe==genre[1] ||this.genreTroupe==genre[2]) )
-            {
-            if(this.durationTroupe<3 || this.durationTroupe >0.5)
-            {
-                var troupeSummary= "Troupe Name is:"+this.troupeName+
-                "\n"+"No of instruments included: "+this.noOfInstrument+
-                "\n"+"Genre Playing: "+this.genreTroupe+
-                "\n"+"Duration of Play :"+this.durationTroupe+
-                "\n"+"Hourly rate of troupe: "+this.hourlyRateTroupe
-    
-                console.log("TROUPE DETAILS:----------> "+'\n'+troupeSummary)
-            }  
-            
-       }
-       else 
-       {
-   
-       throw new Error(' enter genre from list or duration time between 0.5 & 3') 
-       }
-    }
-    costOfTroupe()
-    {
-        let cost= parseFloat(this.durationTroupe*this.hourlyRateTroupe)
-        console.log("COST OF TROUPE :----------> "+cost)
-    }
-    readMusListFile()
-    {
-        const fs = require('fs')
-        const r = fs.readFileSync('MusicianList.txt','utf8') 
-        const list = r.split('\r\n')
+/*
 
-        console.log("POPULATING TROUPE LIST FROM READ TEXT FILE---------->")
-        console.log(list)
+let myMus=enterMus()
 
-    return list
-    }
-    writeMusListFile()
-    {
-        const fs= require('fs')
-
-        let data= "TROUPE DETAILED SUMMARY----------> "+
-        '\n'+"Troupe Name is:"+this.troupeName+
-        "\n"+"No of instruments included: "+this.noOfInstrument+
-        "\n"+"Genre Playing: "+this.genreTroupe+
-        "\n"+"Duration of Play :"+this.durationTroupe+
-        "\n"+"Hourly rate of troupe: "+this.hourlyRateTroupe
-
-        fs.writeFileSync('MusicianListNew.txt',data)
-    }
-}
 
 let guitar1=new Guitarist()
 guitar1.displayDetails()
@@ -215,44 +267,31 @@ let percuss1=new Percussionist()
 percuss1.displayDetails()
 
 let flaut1=new Flautist()
-flaut1.displayDetails()
+flaut1.displayDetails() 
 
 
-let mus1= new Musician('John','Guitarist',2020,50,'I love my guitar strings')
-mus1.displayDetails()
-
-let mus2= new Musician('Kim','Bassist',2010,60,'I love my bass rhythm')
-mus2.displayDetails()
-
-let mus3= new Musician('Sara','Percussionist',1989,70,'I love my percussion harmony')
-mus3.displayDetails()
-
-let mus4= new Musician('Liam','Bassist',1950,80,'I love my old bass')
-mus4.displayDetails()
-
-let mus5= new Musician('Clare','Flautist',2015,90,'I love my flaute symphony')
-mus5.displayDetails()
-
-
-let troupe= new Troupe()
+let troupe= new Troupe('Best troupe',10,'',[],100)
 troupe.addMusician()
 troupe.showMusicianSummary()
 
-troupe.readMusListFile()
+let troupeVal=troupe.setGenre()
+let durationsVal=troupe.setDuration()
+troupe.showtroupeSummary()
+
+troupe.costOfTroupe()
 troupe.writeMusListFile()
 
-let troupe1= new Troupe('Best troupe',10,'bass',-1,100)
-troupe1.showtroupeSummary()
-troupe1.costOfTroupe()
-troupe1.writeMusListFile()
-
-let troupe2=new Troupe('Top star troupe',6,'rock',3,50)
+let mylist=troupe.readMusListFile()
+let troupe2= new Troupe(mylist[0],10,troupeVal,durationsVal,200)
 troupe2.showtroupeSummary()
 troupe2.costOfTroupe()
 troupe2.writeMusListFile()
+*/
+ 
 
-let troupe3=new Troupe(list[0],8,'pop',1,80)
-troupe3.showtroupeSummary()
-troupe3.costOfTroupe()
-troupe3.writeMusListFile()
+module.exports=Musician,Guitarist,Bassist,Flautist,Percussionist,Troupe
+//module.exports=enterMus
+
+
+
 
